@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  background-color: #0073e6;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  margin-top: auto; /* Pour coller le footer en bas */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Dark mode */
+body.dark-mode .footer {
+  background-color: #2d2d2d;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .copyright {
+  color: #aaa;
+}
