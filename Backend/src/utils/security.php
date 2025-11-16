@@ -1,6 +1,6 @@
 <?php
 // this class is for utility functions for security services
-class Security {
+class security {
     public static function sanitize_input($data) {
         $data = trim($data);
         $data = stripcslashes($data);
