@@ -9,7 +9,7 @@ class user_register {
         $this->user_DAO = $user_DAO;
     }
 
-    public function student_register($email, $password) {
+    public function student_register($email, $password) : array {
         // 1: Sanitize input and hash password
         $email = security_utils::sanitize_input($email);
         $password = security_utils::hash_password($password);
@@ -17,11 +17,18 @@ class user_register {
         // 2: Check duplicate account  
         $duplicate_account = $this->user_DAO->retrieve_user_account_by_email($email);
         if($duplicate_account) {
-            return false;
+            return  [
+                        "success" => false, 
+                        "message" => "This email has been registered!"
+                    ];
         }
         // 3: Create new account and save
         $is_student_created = $this->student_DAO->create_student_account($email, $password);
-        return $is_student_created;
+        $return_message = $is_student_created? "Register successfully!" : "Error in creating an account! Try again later or contact our support team for more details!";
+        return  [
+                    "success" => $is_student_created, 
+                    "message" => $return_message
+                ];
     }
 }
 ?>
