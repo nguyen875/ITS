@@ -1,0 +1,13 @@
+# ITS/backend/src/Public/.htaccess
+
+RewriteEngine On
+
+# If the request is not an existing file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route everything to index.php
+RewriteRule ^ index.php [L]
+
+# Optional: block directory listing
+Options -Indexes

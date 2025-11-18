@@ -21,24 +21,30 @@
 
                 $this->conn->commit();
                 return true;
-            } catch(\PDOException $e) {
+            } catch(PDOException $e) {
                 $this->conn->rollBack();
                 error_log('Create user and student account error: ' . $e->getMessage());
-                return false;
+                throw new Exception("Can not create student account");
             }
 
         }
 
         public function retrieve_student_account_by_email($email) {
-            $retrieve_student_account_sql = 'SELECT email, password FROM user WHERE email = ? AND role = ' . 'student';
-            $retrieve_student_account_stmt = $this->conn->prepare($retrieve_student_account_sql);
-            $retrieve_student_account_stmt->execute([$email]);
+            try {
+                $retrieve_student_account_sql = 'SELECT user_id, email, password FROM user WHERE email = ? AND role = ' . 'student';
+                $retrieve_student_account_stmt = $this->conn->prepare($retrieve_student_account_sql);
+                $retrieve_student_account_stmt->execute([$email]);
 
-            $result = $retrieve_student_account_stmt->fetch();
-            return $result ?: null;
+                $result = $retrieve_student_account_stmt->fetch();
+                return $result ?: null;
+            } catch(PDOException $e) {
+                error_log('Retrieve student account error: ' . $e->getMessage());
+                throw new Exception("Can not retrieve student account");
+            }
+            
         }
 
-        public function update_student_account(&$attribute_list, &$update_value_list) {
+        public function update_student_account(&$update_list) {
 
         }
     }

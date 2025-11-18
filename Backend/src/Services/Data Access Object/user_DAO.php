@@ -30,12 +30,17 @@
         // }
 
         public function retrieve_user_account_by_email($email): array {
-            $retrieve_user_account_sql = 'SELECT user_id, email, password, role FROM user WHERE email = ?';
-            $retrieve_user_account_stmt = $this->conn->prepare($retrieve_user_account_sql);
-            $retrieve_user_account_stmt->execute([$email]);
+            try {
+                $retrieve_user_account_sql = 'SELECT user_id, email, password, role FROM user WHERE email = ?';
+                $retrieve_user_account_stmt = $this->conn->prepare($retrieve_user_account_sql);
+                $retrieve_user_account_stmt->execute([$email]);
 
-            $result = $retrieve_user_account_stmt->fetch();
-            return $result ?: null;
+                $result = $retrieve_user_account_stmt->fetch();
+                return $result ?: null;
+            } catch(PDOException $e) {
+                error_log('Retrieve user account error: ' . $e->getMessage());
+                throw new Exception("Can not retrieve user account");
+            }
         }
 
         public function update_student_account(&$attribute_list, &$update_value_list) {

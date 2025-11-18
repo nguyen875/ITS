@@ -1,0 +1,9 @@
+# ITS/backend/src/.htaccess
+
+# Deny access to everything by default
+Deny from all
+
+# Allow access to Public folder
+<Directory "Public">
+    Allow from all
+</Directory>
