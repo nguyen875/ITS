@@ -29,7 +29,7 @@
 
         // }
 
-        public function retrieve_user_account_by_email($email): array {
+        public function retrieve_user_account_by_email($email) {
             try {
                 $retrieve_user_account_sql = 'SELECT user_id, email, password, role FROM user WHERE email = ?';
                 $retrieve_user_account_stmt = $this->conn->prepare($retrieve_user_account_sql);
