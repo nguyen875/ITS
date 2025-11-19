@@ -151,19 +151,25 @@ body.dark-mode .logo span {
 }
 
 body.dark-mode .nav a {
-  color: #fff;
+  color: #ffffff;
 }
 
 body.dark-mode .dropdown {
-  background-color: #2d2d2d;
+  background-color: #3b3b3b;
 }
 
 body.dark-mode .dropdown a,
 body.dark-mode .dropdown button {
-  color: #fff;
+  color: #ffffff;
 }
 
 body.dark-mode .dropdown a:hover,
 body.dark-mode .dropdown button:hover {
   background-color: #3d3d3d;
+}
+
+body.dark-mode .language-select{
+  background-color: #3d3d3d;
+  color: #ffffff;
+  border: 1px solid #555;
 }

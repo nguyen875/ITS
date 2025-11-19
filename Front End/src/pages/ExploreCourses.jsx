@@ -5,18 +5,18 @@ import CourseCard from "../components/CourseCard";
 import "../styles/ExploreCourses.css";
 
 const courses = [
-  { title: "React for Beginners", description: "Learn React step by step", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1XSoRS_8Kw6XKWzcvp34RzApJ0eh7FdgDdw&s" },
-  { title: "Advanced Python", description: "Deep dive into Python", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUltxhjSZ1ciRClHNtZakqd3yeFPWJYjftqg&s" },
-  { title: "Machine Learning", description: "Intro to ML concepts", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU4NgZ_0zmZ8NtdI6LuCd3cgUbSHSPJ5_msg&s" },
-  { title: "UI/UX Basics", description: "Design better UI", image: "https://via.placeholder.com/150" },
-  { title: "JavaScript Mastery", description: "Master JS", image: "https://via.placeholder.com/150" },
-  { title: "Node.js Crash Course", description: "Backend with Node", image: "https://via.placeholder.com/150" },
-  { title: "Cybersecurity 101", description: "Basics of security", image: "https://via.placeholder.com/150" },
-  { title: "SQL for Beginners", description: "Learn SQL", image: "https://via.placeholder.com/150" },
-  { title: "Docker Essentials", description: "Intro to Docker", image: "https://via.placeholder.com/150" },
-  { title: "AI Fundamentals", description: "Basics of AI", image: "https://via.placeholder.com/150" },
-  { title: "Cloud Computing", description: "Cloud basics", image: "https://via.placeholder.com/150" },
-  { title: "Data Structures", description: "Algorithms & Structures", image: "https://via.placeholder.com/150" },
+  { title: "React for Beginners", description: "Learn React step by step", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Advanced Python", description: "Deep dive into Python", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Machine Learning", description: "Intro to ML concepts", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "UI/UX Basics", description: "Design better UI", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "JavaScript Mastery", description: "Master JS", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Node.js Crash Course", description: "Backend with Node", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Cybersecurity 101", description: "Basics of security", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "SQL for Beginners", description: "Learn SQL", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Docker Essentials", description: "Intro to Docker", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "AI Fundamentals", description: "Basics of AI", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Cloud Computing", description: "Cloud basics", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
+  { title: "Data Structures", description: "Algorithms & Structures", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
 ];
 
 const ITEMS_PER_PAGE = 9;

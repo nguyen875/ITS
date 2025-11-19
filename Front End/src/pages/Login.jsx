@@ -1,14 +1,16 @@
 import "../styles/Fonts.css"
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext} from "react";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
     const [show, setShow] = useState(false);
     const [input, setInput] = useState({email: "", password: ""});
     const [error, setError] = useState({email: "", password: ""});
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
     
     function loginValidation(e) {
         e.preventDefault();
@@ -29,6 +31,8 @@ export default function Login() {
         setError(newError);
 
         if (Object.values(newError).every(value => value == "")) {
+            const userData = { email: input.email, name: "Alice" };
+            login(userData);
             navigate("/");
         }
     }

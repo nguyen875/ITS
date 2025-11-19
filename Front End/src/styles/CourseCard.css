@@ -27,12 +27,12 @@
 }
 
 .course-content p {
-  color: #666;
+  color: #575656;
   font-size: 14px;
 }
 
 body.dark-mode .course-card {
-  background-color: #5f5f5f;
+  background-color: #565656;
   color: #e0e0e0;
 }
 
