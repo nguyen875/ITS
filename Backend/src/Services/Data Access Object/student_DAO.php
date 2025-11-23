@@ -12,7 +12,7 @@
 
                 $create_user_account_sql = 'INSERT INTO user (email, password, role) VALUES (?, ?, ?)';
                 $create_user_account_stmt = $this->conn->prepare($create_user_account_sql);
-                $create_user_account_stmt->execute([$email, $password, 'student']);
+                $create_user_account_stmt->execute([$email, $password, 'Student']);
                 $user_ID = $this->conn->lastInsertId();
 
                 $create_student_account_sql = 'INSERT INTO student (user_id, enrollment_year) VALUES (?, ?)';

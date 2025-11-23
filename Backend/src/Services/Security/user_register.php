@@ -2,14 +2,12 @@
 require_once __DIR__ . '/../../utils/security_utils.php';
 
 class user_register {
-    private $student_DAO;
     private $user_DAO;
-    public function __construct($student_DAO, $user_DAO) {
-        $this->student_DAO = $student_DAO;
+    public function __construct($user_DAO) {
         $this->user_DAO = $user_DAO;
     }
 
-    public function student_register($email, $password) : array {
+    public function user_register($email, $password, $role) : array {
         try {
             // 1: Sanitize input and hash password
             $email = security_utils::sanitize_input($email);
@@ -26,17 +24,17 @@ class user_register {
                         ];
             }
             // 3: Create new account and save
-            $is_student_created = $this->student_DAO->create_student_account($email, $password);
-            $return_message = $is_student_created? "Register successfully!" : "Error in creating an account! Try again later or contact our support team for more details!";
+            $is_account_created = $this->user_DAO->create_user_account($email, $password, $role);
+            $return_message = $is_account_created? "Register successfully!" : "Error in creating an account! Try again later or contact our support team for more details!";
             return  [
-                        "success" => $is_student_created, 
+                        "success" => $is_account_created, 
                         "body" => [
                             "message" => $return_message
                         ]
                     ];
         }catch(Exception $e) {
-            error_log('Student register error: ' . $e->getMessage());
-            throw new Exception('Student register error!');
+            error_log('User register error: ' . $e->getMessage());
+            throw new Exception('User register error!');
         }
         
     }

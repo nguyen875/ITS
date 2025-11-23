@@ -8,7 +8,7 @@ class register_controller {
     public function student_register($request_data): array {
         $email = $request_data['email'] ?? '';
         $password = $request_data['password'] ?? '';
-
+        $role = 'Student';
         if(!security_utils::validate_email($email) || !security_utils::validate_password($password)) {
             return  [
                         "status" => 400,
@@ -18,7 +18,36 @@ class register_controller {
                     ];
         }
         try {
-            $respond = $this->security_service->student_register($email, $password);
+            $respond = $this->security_service->user_register($email, $password, $role);
+            return  [
+                        "status" => 200,
+                        "body" => $respond['body']
+                    ];
+        } catch(Exception $e) {
+            return  [
+                        "status" => 500,
+                        "body" => [
+                            "error" => $e->getMessage()
+                        ]
+                    ];
+        }
+    }
+
+
+    public function teacher_register($request_data): array {
+        $email = $request_data['email'] ?? '';
+        $password = $request_data['password'] ?? '';
+        $role = 'Teacher';
+        if(!security_utils::validate_email($email) || !security_utils::validate_password($password)) {
+            return  [
+                        "status" => 400,
+                        "body" => [
+                            "message" => "Invalid email or password format! Try again!"
+                        ]
+                    ];
+        }
+        try {
+            $respond = $this->security_service->user_register($email, $password, $role);
             return  [
                         "status" => 200,
                         "body" => $respond['body']

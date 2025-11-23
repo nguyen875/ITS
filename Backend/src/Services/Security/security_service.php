@@ -18,15 +18,15 @@ class security_service {
         $this->user_DAO = new user_DAO();
         $this->jwt_service = new jwt_service(jwt_key: JWT_KEY);
         $this->authentication = new authentication($this->user_DAO, $this->jwt_service);
-        $this->user_register = new user_register($this->student_DAO, $this->user_DAO);
+        $this->user_register = new user_register($this->user_DAO);
     }
 
     public function user_login($email, $password) {
         return $this->authentication->user_login($email, $password);
     }
 
-    public function student_register($email, $password) {
-        return $this->user_register->student_register($email, $password);
+    public function user_register($email, $password, $role) {
+        return $this->user_register->user_register($email, $password, $role);
     }
 
 }

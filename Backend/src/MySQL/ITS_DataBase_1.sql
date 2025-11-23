@@ -3,13 +3,13 @@ CREATE DATABASE IF NOT EXISTS its_db;
 USE its_db;
 
 
-CREATE TABLE role (
+-- CREATE TABLE role (
 
-  role_name VARCHAR(50) PRIMARY KEY,
+--   role_name VARCHAR(50) PRIMARY KEY,
 
-  default_permission TEXT
+--   default_permission TEXT
 
-) ENGINE=InnoDB;
+-- ) ENGINE=InnoDB;
 
 
 
@@ -23,15 +23,11 @@ CREATE TABLE `user` (
 
   name VARCHAR(200),
 
-  role VARCHAR(50),
+  role ENUM('Student', 'Teacher', 'Admin'),
 
   is_active BOOLEAN DEFAULT 1,
 
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-FOREIGN KEY (role) REFERENCES `role`(role_name) ON DELETE CASCADE,
-
-  INDEX (role)
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 
 ) ENGINE=InnoDB;
 
