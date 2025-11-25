@@ -51,7 +51,7 @@ Follow these steps to set up and run the backend of this project.
 ## 7. API Documentation
 - Refer to ./API_DOC.md for details on all implemented API endpoints.
 - Authentication Notes:
-    - For all APIs (except register and login), you must include:
+    - For all APIs (except register and login), you must include in the HTTP header (or Headers tab in Postman):
     - Key: Authorization
     - Value: JWT token returned from the login API
 - Ensure the HTTP method matches the specification in API_DOC.md.
