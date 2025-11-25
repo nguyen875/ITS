@@ -9,8 +9,12 @@ require_once __DIR__ . '/../Controller/auth_controller.php';
 require_once __DIR__ . '/../Controller/register_controller.php';
 require_once __DIR__ . '/../Services/Security/security_service.php';
 require_once __DIR__ . '/../Services/Security/authorization_middleware.php';
+require_once __DIR__ . '/../Services/User Management/admin_create.php';
+require_once __DIR__ . '/../Services/User Management/admin_edit.php';
+require_once __DIR__ . '/../Services/User Management/admin_delete.php';
 require_once __DIR__ . '/../Services/Security/jwt_service.php';
 require_once __DIR__ . '/../../Config/jwt_key.php';
+
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_uri = $_SERVER['REQUEST_URI'];
 
@@ -44,6 +48,32 @@ try {
                     http_response_code($respond['status']);
                     echo json_encode($respond['body']);
                     break;
+                  
+                 //newly add section
+                case 'admin_create':
+                    $adminCreate = new admin_create();
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $adminCreate->create($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+
+                case 'admin_edit':
+                    $adminEdit = new admin_edit();
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $adminEdit->edit($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+
+                case 'admin_delete':
+                    $adminDelete = new admin_delete();
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $adminDelete->delete($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+                 //newly added section
                 default:
                     http_response_code(404);
                     break;
