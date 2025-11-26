@@ -41,9 +41,22 @@
   color: #343a40;
 }
 
+.course-detail ul {
+  list-style-type: disc;
+  padding-left: 20px; 
+  margin-bottom: 40px;
+  color: #4e5053;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.course-detail ul li {
+  margin-bottom: 0.5em; 
+}
+
 .course-detail p {
   font-size: 20px;
-  color: #6c757d;
+  color: #4e5053;
   line-height: 1.6;
   margin-bottom: 40px;
   flex-grow: 1;
