@@ -1,0 +1,64 @@
+.course-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 10px;
+  min-width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.course-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+}
+
+.course-title-rectangle {
+  padding: 20px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+/* On applique des couleurs selon la position */
+.course-card:nth-child(3n+1) .course-title-rectangle {
+  background: linear-gradient(135deg, #f63e5d 0%, #ff6780 100%);
+}
+
+.course-card:nth-child(3n+2) .course-title-rectangle {
+  background: linear-gradient(135deg, #4165dd 0%, #7691ec 100%);
+}
+
+.course-card:nth-child(3n+3) .course-title-rectangle {
+  background: linear-gradient(135deg, #f4b262 0%, #ffd6a5 100%);
+}
+
+/* Mode nuit */
+body.dark-mode .course-card:nth-child(3n+1) .course-title-rectangle {
+  background: #c51f3b; 
+}
+
+body.dark-mode .course-card:nth-child(3n+2) .course-title-rectangle {
+  background: #1c3ca3; 
+}
+
+body.dark-mode .course-card:nth-child(3n+3) .course-title-rectangle {
+  background: #e3993e;
+}
+
+.course-description {
+  padding: 15px;
+  font-size: 1rem;
+  color: #5d5c5c;
+  background: #f3f3f3;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* Mode nuit pour le texte */
+body.dark-mode .course-description {
+  background: #5d5c5c;
+  color: #eee;
+}

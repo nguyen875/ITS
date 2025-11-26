@@ -1,0 +1,32 @@
+.footer {
+  width: 100%;
+  background: linear-gradient(90deg, #6366f1, #5b4cba);
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  margin-top: auto; 
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Dark mode */
+body.dark-mode .footer {
+  background: linear-gradient(20deg, #6366f1, #323232);
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .copyright {
+  color: #ffffff;
+}
