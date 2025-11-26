@@ -1,18 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/CourseCard.css";
 
-const CourseCard = ({ course }) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/course/${course.id}`);
-  };
-
+const CourseCard = ({ course, onClick }) => {
   return (
     <div className="course-card">
       <div 
         className="course-title-rectangle" 
-        onClick={handleClick}
+        onClick={onClick} // utilise la prop onClick
       >
         {course.title}
       </div>

@@ -4,12 +4,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CourseCard from "../components/CourseCard";
 import "../styles/ExploreCourses.css";
+import { courses } from "../components/ListCourse";
 
-const myCourses = [
-  { title: "React for Beginners", description: "Learn React step by step", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
-  { title: "Advanced Python", description: "Deep dive into Python", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
-  { title: "UI/UX Basics", description: "Design better UI", image: "https://img-c.udemycdn.com/course/480x270/4782160_dfdf.jpg" },
-];
+// Liste des IDs ou objets des cours que l'utilisateur a enregistrés
+const myCoursesIds = [1, 2, 3]; // tu peux adapter dynamiquement si besoin
 
 const ITEMS_PER_PAGE = 9;
 
@@ -17,9 +15,12 @@ const MyCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
-  const totalPages = Math.ceil(myCourses.length / ITEMS_PER_PAGE);
+  // Filtrer la liste complète pour ne garder que les cours enregistrés
+  const myCoursesList = courses.filter(course => myCoursesIds.includes(course.id));
+
+  const totalPages = Math.ceil(myCoursesList.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentCourses = myCourses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const currentCourses = myCoursesList.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
@@ -42,8 +43,12 @@ const MyCourses = () => {
         </div>
 
         <div className="explore-grid">
-          {currentCourses.map((course, idx) => (
-            <CourseCard key={idx} course={course} />
+          {currentCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              onClick={() => navigate(`/my-course/${course.id}`)} // navigation vers page déjà inscrit
+            />
           ))}
         </div>
 

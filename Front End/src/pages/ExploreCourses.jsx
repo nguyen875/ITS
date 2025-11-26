@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CourseCard from "../components/CourseCard";
@@ -9,6 +10,7 @@ const ITEMS_PER_PAGE = 9;
 
 const ExploreCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const totalPages = Math.ceil(courses.length / ITEMS_PER_PAGE);
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -31,6 +33,7 @@ const ExploreCourses = () => {
             <CourseCard
               key={course.id}
               course={course}
+              onClick={() => navigate(`/course/${course.id}`)} // ici on redirige vers page register
             />
           ))}
         </div>

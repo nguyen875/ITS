@@ -7,6 +7,7 @@ import ExploreCourses from "./pages/ExploreCourses";
 import MyCourses from "./pages/MyCourses";
 import { AuthProvider } from "./context/AuthContext";
 import CoursesPage from "./pages/CoursePage";
+import CoursesDetailPage from "./pages/CourseRegisteredPage";
 
 
 const App = () => {
@@ -21,8 +22,9 @@ const App = () => {
           <Route path="/explore-courses" element={<ExploreCourses />} />
           <Route path="/my-courses" element={<MyCourses />} />
           <Route path="/course/:id" element={<CoursesPage />} />
-      </Routes>
-    </Router>
+          <Route path="/my-course/:id" element={<CoursesDetailPage />} />
+        </Routes>
+      </Router>
     </AuthProvider>
   );
 };
