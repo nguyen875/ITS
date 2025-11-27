@@ -1,16 +1,37 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/CoursePage.css";
 import { courses } from "../components/ListCourse.jsx";
 import { myCoursesIds } from "./MyCourses.jsx";
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const CoursesPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const course = courses.find(c => c.id === parseInt(id));
+  const { login } = useContext(AuthContext);
 
   const handleRegister = () => {
+    if (!login) {
+      alert("You must be logged in to register to a course.");
+      return
+    }
+
+    if (!course) return;
+
+    if (myCoursesIds.includes(course.id)) {
+      alert("You are already enrolled in this course.");
+      return;
+    }
+
+    myCoursesIds.push(course.id);
+    alert("The course has been successfully added to My Courses!");
+  };
+
+
+  /*const handleRegister = () => {
     if (!course) return;
     if (myCoursesIds.includes(course.id)) {
       alert("You are already enrolled in this course.");
@@ -33,7 +54,7 @@ const CoursesPage = () => {
         <Footer />
       </>
     );
-  }
+  }*/
 
   return (
     <>
