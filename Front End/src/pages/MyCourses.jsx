@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CourseCard from "../components/CourseCard";
 import "../styles/ExploreCourses.css";
 import { courses } from "../components/ListCourse";
+import { AuthContext } from "../context/AuthContext";
 
 // List of the courses the user is registered to
 export let myCoursesIds = []; 
@@ -14,8 +15,14 @@ const ITEMS_PER_PAGE = 9;
 const MyCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const { user, login } = useContext(AuthContext);
 
-  // Filtrer la liste complète pour ne garder que les cours enregistrés
+    useEffect(() => {
+    if (!user) {
+      myCoursesIds = []; // 👈 vide la liste si déconnecté
+    }
+  }, [user]);
+  
   const myCoursesList = courses.filter(course =>
     myCoursesIds.includes(course.id)
   );
