@@ -7,11 +7,9 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . '/../Controller/auth_controller.php';
 require_once __DIR__ . '/../Controller/register_controller.php';
+require_once __DIR__ . '/../Controller/admin_controller.php';
 require_once __DIR__ . '/../Services/Security/security_service.php';
 require_once __DIR__ . '/../Services/Security/authorization_middleware.php';
-require_once __DIR__ . '/../Services/User Management/admin_create.php';
-require_once __DIR__ . '/../Services/User Management/admin_edit.php';
-require_once __DIR__ . '/../Services/User Management/admin_delete.php';
 require_once __DIR__ . '/../Services/Security/jwt_service.php';
 require_once __DIR__ . '/../../Config/jwt_key.php';
 
@@ -51,25 +49,25 @@ try {
                   
                  //newly add section
                 case 'admin_create':
-                    $adminCreate = new admin_create();
+                    $admin_controller = new admin_controller(new security_service());
                     $request_data = json_decode(file_get_contents("php://input"), true);
-                    $respond = $adminCreate->create($request_data);
-                    http_response_code($respond['status']);
-                    echo json_encode($respond['body']);
-                    break;
-
-                case 'admin_edit':
-                    $adminEdit = new admin_edit();
-                    $request_data = json_decode(file_get_contents("php://input"), true);
-                    $respond = $adminEdit->edit($request_data);
+                    $respond = $admin_controller->create($request_data);
                     http_response_code($respond['status']);
                     echo json_encode($respond['body']);
                     break;
 
                 case 'admin_delete':
-                    $adminDelete = new admin_delete();
+                    $admin_controller = new admin_controller(new security_service());
                     $request_data = json_decode(file_get_contents("php://input"), true);
-                    $respond = $adminDelete->delete($request_data);
+                    $respond = $admin_controller->delete($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+
+                case 'admin_edit':
+                    $admin_controller = new admin_controller(new security_service());
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $admin_controller->edit($request_data);
                     http_response_code($respond['status']);
                     echo json_encode($respond['body']);
                     break;

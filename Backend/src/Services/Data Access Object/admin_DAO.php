@@ -20,28 +20,28 @@ class admin_DAO {
             $sql = 'INSERT INTO `user` (email, password, name, role, is_active) VALUES (?, ?, ?, ?, ?)';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$email, $hashed_password, $name, $role, $is_active]);
-            // $userId = $this->conn->lastInsertId();
+            $userId = $this->conn->lastInsertId();
 
-            // switch ($role) {
-            //     case 'Student':
-            //         $sql = 'INSERT INTO student (user_id, enrollment_year) VALUES (?, ?)';
-            //         $stmt = $this->conn->prepare($sql);
-            //         $stmt->execute([$userId, date('Y')]);
-            //         break;
-            //     case 'Teacher':
-            //         $sql = 'INSERT INTO teacher (user_id) VALUES (?)';
-            //         $stmt = $this->conn->prepare($sql);
-            //         $stmt->execute([$userId]);
-            //         break;
-            //     case 'Admin':
-            //         $sql = 'INSERT INTO admin (user_id) VALUES (?)';
-            //         $stmt = $this->conn->prepare($sql);
-            //         $stmt->execute([$userId]);
-            //         break;
-            //     default:
-            //         $this->conn->rollBack();
-            //         throw new InvalidArgumentException("Invalid role: $role");
-            // }
+            switch ($role) {
+                case 'Student':
+                    $sql = 'INSERT INTO student (user_id, enrollment_year) VALUES (?, ?)';
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->execute([$userId, date('Y')]);
+                    break;
+                case 'Teacher':
+                    $sql = 'INSERT INTO teacher (user_id) VALUES (?)';
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->execute([$userId]);
+                    break;
+                case 'Admin':
+                    $sql = 'INSERT INTO admin (user_id) VALUES (?)';
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->execute([$userId]);
+                    break;
+                default:
+                    $this->conn->rollBack();
+                    throw new InvalidArgumentException("Invalid role: $role");
+            }
 
             $this->conn->commit();
             return true;
@@ -149,16 +149,16 @@ class admin_DAO {
     /**
      * Optional helper: retrieve user by email (returns assoc array or null)
      */
-    // public function retrieve_user_by_email(string $email) {
-    //     try {
-    //         $stmt = $this->conn->prepare('SELECT user_id, email, name, role, is_active FROM `user` WHERE email = ?');
-    //         $stmt->execute([$email]);
-    //         $result = $stmt->fetch();
-    //         return $result ?: null;
-    //     } catch (\Exception $e) {
-    //         error_log('admin_DAO retrieve_user_by_email error: ' . $e->getMessage());
-    //         throw new Exception('Failed to retrieve user');
-    //     }
-    // }
+    public function retrieve_user_by_email(string $email) {
+        try {
+            $stmt = $this->conn->prepare('SELECT user_id, email, name, role, is_active FROM `user` WHERE email = ?');
+            $stmt->execute([$email]);
+            $result = $stmt->fetch();
+            return $result ?: null;
+        } catch (\Exception $e) {
+            error_log('admin_DAO retrieve_user_by_email error: ' . $e->getMessage());
+            throw new Exception('Failed to retrieve user');
+        }
+    }
 }
 ?>
