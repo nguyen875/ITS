@@ -13,7 +13,7 @@ class admin_create {
         $name = $name !== null ? security_utils::sanitize_input($name) : null;
         $hashed = security_utils::hash_password($password);
 
-        $duplicate_account = $this->admin_DAO->retrieve_user_account_by_email($email);
+        $duplicate_account = $this->admin_DAO->retrieve_user_by_email($email);
         if($duplicate_account) {
             return  [
                         "success" => false, 

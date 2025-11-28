@@ -284,5 +284,58 @@ class course_controller {
             ];
         }
     }
+
+    /**
+     * enroll
+     * Expects $request_data: ['student_id'=>int, 'course_id'=>int]
+     */
+    public function enroll(array $request_data): array {
+        $student_id = isset($request_data['user_id']) ? (int)$request_data['user_id'] : 0;
+        $course_id = isset($request_data['course_id']) ? (int)$request_data['course_id'] : 0;
+        $password = $request_data['password'] ?? null;
+
+        if ($student_id <= 0) {
+            return ['status' => 400, 'body' => ['message' => 'invalid or missing student id']];
+        }
+
+        if ($course_id <= 0) {
+            return ['status' => 400, 'body' => ['message' => 'invalid or missing course id']];
+        }
+
+        try {
+            $respond = $this->security_service->enroll($student_id, $course_id, $password);
+            return [
+                "status" => $respond['status'] ?? 200,
+                "body" => $respond['body']
+            ];
+        } catch(Exception $e) {
+            return [
+                "status" => 500,
+                "body" => ["error" => $e->getMessage()]
+            ];
+        }
+    }
+
+    public function get_enrolled_courses(array $request_data): array {
+        $student_id = isset($request_data['user_id']) ? (int)$request_data['user_id'] : 0;
+
+        if ($student_id <= 0) {
+            return ['status' => 400, 'body' => ['message' => 'invalid or missing student id']];
+        }
+
+        try {
+            $respond = $this->security_service->get_enrolled_courses($student_id, $course_id, $password);
+            return [
+                "status" => $respond['status'] ?? 200,
+                "body" => $respond['body']
+            ];
+        } catch(Exception $e) {
+            return [
+                "status" => 500,
+                "body" => ["error" => $e->getMessage()]
+            ];
+        }
+    }
+
 }
 ?>

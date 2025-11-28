@@ -62,8 +62,6 @@ Can be use by admins to delete a user by id
     - 200: successfully deleted
     - Body: {"message":"User deleted successfully"}
     - 400 or 500: error
-
-
 ### http://localhost/its/course_create
 Purpose: create a new course (teacher creates a course)
 Input:
@@ -75,9 +73,6 @@ Output:
   - 200: successfully created
     - Body: {"message":"Course created successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/course_edit
 Purpose: edit an existing course
 Input:
@@ -89,9 +84,6 @@ Output:
   - 200: successfully updated
     - Body: {"message":"Course updated successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/course_by_teacher
 Purpose: retrieve all courses created by a teacher
 Input:
@@ -100,9 +92,6 @@ Output:
   - 200: success
     - Body: {"courses":[ { "course_id":1, "title":"...", "description":"...", "created_by":12, "created_at":"..." }, ... ]}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/course_delete
 Purpose: delete a course by id
 Input:
@@ -111,9 +100,6 @@ Output:
   - 200: successfully deleted
     - Body: {"message":"Course deleted successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/unit_add
 Purpose: add a unit to a course
 Input:
@@ -125,9 +111,6 @@ Output:
   - 200: unit added successfully
     - Body: {"message":"Unit added successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/unit_edit
 Purpose: edit an existing unit
 Input:
@@ -139,9 +122,6 @@ Output:
   - 200: successfully updated
     - Body: {"message":"Unit updated successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/unit_delete
 Purpose: delete a unit by id
 Input:
@@ -150,9 +130,6 @@ Output:
   - 200: successfully deleted
     - Body: {"message":"Unit deleted successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/content_add
 Purpose: add a content item to a unit
 Input:
@@ -165,9 +142,6 @@ Output:
   - 200: content added successfully
     - Body: {"message":"Content added successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/content_edit
 Purpose: edit an existing content item
 Input:
@@ -180,9 +154,6 @@ Output:
   - 200: successfully updated
     - Body: {"message":"Content updated successfully"}
   - 400 or 500: error
-*/
-
-
 ### http://localhost/its/content_delete
 Purpose: delete a content item by id
 Input:
@@ -191,5 +162,24 @@ Output:
   - 200: successfully deleted
     - Body: {"message":"Content deleted successfully"}
   - 400 or 500: error
-*/
+### http://localhost/its/enroll
+Purpose: enroll a student in a course (verifies course password if set)
+Input:
+  - user_id: integer (required)
+  - course_id: integer (required)
+  - password: string (required if course is password protected)
+Output:
+  - 200: enrolled successfully
+    - Body: {"message":"enrolled successfully"}
+  - 400: validation or authentication error
+    - Body: {"message":"Wrong password!"}
+  - 500: error
 
+### http://localhost/its/get_enrolled_courses
+Purpose: retrieve courses a student is enrolled in
+Input:
+  - user_id: integer (required)
+Output:
+  - 200: successfully retrieved
+    - Body: {"courses":[{"course_id":integer,"title":"string","description":"string","created_by":integer}, ...]}
+  - 400 or 500: error

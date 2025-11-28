@@ -12,7 +12,7 @@ class admin_DAO {
      * Create user account and role-specific record.
      * Returns true on success, throws Exception on failure.
      */
-    public function create_user_account(string $email, string $hashed_password, ?string $name, string $role): bool {
+    public function create_user_account(string $email, string $hashed_password, string $name, string $role): bool {
         try {
             $this->conn->beginTransaction();
 

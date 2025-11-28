@@ -51,8 +51,8 @@ class course_DAO {
             $sql = 'SELECT course_id, title, description, created_by, created_at FROM course WHERE created_by = ?';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$teacher_id]);
-            $rows = $stmt->fetchAll();
-            return $rows ?: [];
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rows === false ? [] : $rows;
         } catch (\Exception $e) {
             error_log('course_DAO get_courses_by_teacher error: ' . $e->getMessage());
             throw new Exception('Failed to retrieve courses');

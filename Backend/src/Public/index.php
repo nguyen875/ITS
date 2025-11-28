@@ -152,7 +152,23 @@ try {
                     http_response_code($respond['status']);
                     echo json_encode($respond['body']);
                     break;
-                 //newly added section
+
+                case 'enroll':
+                    $course_controller = new course_controller(new security_service());
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $course_controller->enroll($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+
+                case 'get_enrolled_courses':
+                    $course_controller = new course_controller(new security_service());
+                    $request_data = json_decode(file_get_contents("php://input"), true);
+                    $respond = $course_controller->get_enrolled_courses($request_data);
+                    http_response_code($respond['status']);
+                    echo json_encode($respond['body']);
+                    break;
+                 //newly added section 
                 default:
                     http_response_code(404);
                     break;

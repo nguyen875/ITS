@@ -205,8 +205,6 @@ CREATE TABLE enrollment (
 
   course_id BIGINT NOT NULL,
 
-  progress DECIMAL(5,2) DEFAULT 0,
-
   PRIMARY KEY (student_id, course_id),
 
   FOREIGN KEY (student_id) REFERENCES student(user_id) ON DELETE CASCADE,

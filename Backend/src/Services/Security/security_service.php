@@ -5,10 +5,12 @@ require_once __DIR__ . '/../Data Access Object/student_DAO.php';
 require_once __DIR__ . '/../Data Access Object/user_DAO.php';
 require_once __DIR__ . '/../Data Access Object/admin_DAO.php';
 require_once __DIR__ . '/../Data Access Object/course_DAO.php';
+require_once __DIR__ . '/../Data Access Object/enrollment_DAO.php';
 require_once __DIR__ . '/authentication.php';
 require_once __DIR__ . '/user_register.php';
 require_once __DIR__ . '/jwt_service.php';
 require_once __DIR__ . '/../Course Management/course_builder.php';
+require_once __DIR__ . '/../Course Management/enrollment.php';
 require_once __DIR__ . '/../User Management/admin_create.php';
 require_once __DIR__ . '/../User Management/admin_delete.php';
 require_once __DIR__ . '/../User Management/admin_edit.php';
@@ -18,6 +20,7 @@ class security_service {
     private $user_DAO;
     private $admin_DAO;
     private $course_DAO;
+    private $enrollment_DAO;
     private $jwt_service;
     private $authentication;
     private $user_register;
@@ -25,6 +28,7 @@ class security_service {
     private $admin_edit;
     private $admin_delete;
     private $course_builder;
+    private $enrollment;
     // private $create_course;
     // private $edit_course;
     // private $get_courses_by_teacher;
@@ -41,6 +45,7 @@ class security_service {
         $this->user_DAO = new user_DAO();
         $this->admin_DAO = new admin_DAO();
         $this->course_DAO = new course_DAO();
+        $this->enrollment_DAO = new enrollment_DAO();
         $this->jwt_service = new jwt_service(jwt_key: JWT_KEY);
         $this->authentication = new authentication($this->user_DAO, $this->jwt_service);
         $this->user_register = new user_register($this->user_DAO);
@@ -48,6 +53,7 @@ class security_service {
         $this->admin_delete = new admin_delete($this->admin_DAO);
         $this->admin_edit = new admin_edit($this->admin_DAO);
         $this->course_builder = new course_builder($this->course_DAO);
+        $this->enrollment = new enrollment($this->enrollment_DAO);
 
     }
 
@@ -109,6 +115,14 @@ class security_service {
 
     public function delete_content($content_id) {
         return $this->course_builder->delete_content($content_id);
+    }
+
+    public function enroll($student_id, $course_id, $password) {
+        return $this->enrollment->enroll($student_id, $course_id, $password);
+    }
+
+    public function get_enrolled_courses($student_id) {
+        return $this->enrollment->get_enrolled_courses($student_id);
     }
 
 }

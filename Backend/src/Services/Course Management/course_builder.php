@@ -15,7 +15,7 @@ class course_builder {
     public function create_course($title,$description,$password,$created_by): array {
         $title = security_utils::sanitize_input($title);
         $description = $description !== null ? security_utils::sanitize_input($description) : null;
-        $password = $password !== null ? security_utils::sanitize_input($password) : null;
+        $password = $password !== null ? security_utils::hash_password($password) : null;
 
         try {
             $created = $this->course_DAO->create_course($title, $description, $password, $created_by);
@@ -29,7 +29,7 @@ class course_builder {
     public function edit_course($course_id, $title, $description, $password): array {
         $title = $title !== null ? security_utils::sanitize_input($title) : null;
         $description = $description !== null ? security_utils::sanitize_input($description) : null;
-        $password = $password !== null ? security_utils::sanitize_input($password) : null;
+        $password = $password !== null ? security_utils::hash_password($password) : null;
 
         try {
             $updated = $this->course_DAO->update_course($course_id, $title, $description, $password);
