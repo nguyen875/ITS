@@ -1,8 +1,4 @@
 <?php
-// // Admin create user class
-// require_once __DIR__ . '/../../utils/security_utils.php';
-// require_once __DIR__ . '/../Data Access Object/admin_DAO.php';
-
 class admin_create {
     private $admin_DAO;
 
@@ -10,21 +6,9 @@ class admin_create {
         $this->admin_DAO = $admin_DAO;
     }
 
-    /**
-     * Create a new user.
-     * Expects $request_data: ['email'=>string, 'password'=>string, 'name'=>string|null, 'role'=>string]
-     * Returns: ['status'=>int, 'body'=>array]
-     */
+  
     public function create($email, $password, $name, $role): array {
-        // $email = $request_data['email'] ?? '';
-        // $password = $request_data['password'] ?? '';
-        // $name = $request_data['name'] ?? null;
-        // $role = $request_data['role'] ?? '';
-
-        // if (!security_utils::validate_email($email) || !security_utils::validate_password($password)) {
-        //     return ['status' => 400, 'body' => ['message' => 'Invalid email or password format']];
-        // }
-
+       
         $email = security_utils::sanitize_input($email);
         $name = $name !== null ? security_utils::sanitize_input($name) : null;
         $hashed = security_utils::hash_password($password);

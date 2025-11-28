@@ -1,7 +1,4 @@
 <?php
-// // Admin delete user class
-// require_once __DIR__ . '/../../utils/security_utils.php';
-// require_once __DIR__ . '/../Data Access Object/admin_DAO.php';
 
 class admin_delete {
     private $admin_DAO;
@@ -10,11 +7,7 @@ class admin_delete {
         $this->admin_DAO = $admin_DAO;
     }
 
-    /**
-     * Delete a user.
-     * Expects $request_data: ['user_id'=>int]
-     * Returns: ['status'=>int, 'body'=>array]
-     */
+
     public function delete($user_id): array {
 
         try {
