@@ -104,3 +104,7 @@ body.dark-mode .explore-page {
   margin: 40px 0;
   color: #3b3a3a;
 }
+
+body.black-mode .no-courses-message {
+  color: #d0d0d0;
+}

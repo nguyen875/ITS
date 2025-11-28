@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CourseCard from "../components/CourseCard";
 import "../styles/ExploreCourses.css";
 import { courses } from "../components/ListCourse";
+import { AuthContext } from "../context/AuthContext";
 
 // List of the courses the user is registered to
 export let myCoursesIds = []; 
@@ -14,16 +15,20 @@ const ITEMS_PER_PAGE = 9;
 const MyCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const { user, login } = useContext(AuthContext);
 
-  // Filtrer la liste complète pour ne garder que les cours enregistrés
+    useEffect(() => {
+    if (!user) {
+      myCoursesIds = []; 
+    }
+  }, [user]);
+  
   const myCoursesList = courses.filter(course =>
     myCoursesIds.includes(course.id)
   );
 
-  // 👉 CHECK : la liste est-elle vide ?
   const noCourses = myCoursesList.length === 0;
 
-  // Pagination (uniquement si on a des cours)
   const totalPages = Math.ceil(myCoursesList.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentCourses = myCoursesList.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -41,7 +46,6 @@ const MyCourses = () => {
         <div className="explore-header">
           <h1 className="explore-title">My Courses</h1>
 
-          {/* bouton toujours visible */}
           <button
             className="add-course-page-button"
             onClick={() => navigate("/explore-courses")}
@@ -51,17 +55,11 @@ const MyCourses = () => {
         </div>
 
         {noCourses ? (
-          // --------------------------
-          // 🚫 AFFICHAGE SI LISTE VIDE
-          // --------------------------
           <div className="no-courses-message">
             <p>You are not enrolled in any course yet.</p>
             <p>Please browse our catalog to get started.</p>
           </div>
         ) : (
-          // --------------------------
-          // ✅ AFFICHAGE NORMAL SI LISTE OK
-          // --------------------------
           <>
             <div className="explore-grid">
               {currentCourses.map((course) => (
